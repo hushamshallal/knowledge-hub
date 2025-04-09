@@ -1,5 +1,57 @@
 <!DOCTYPE html>
-<html lang="ar">
-<head><meta charset="UTF-8"><title>تسجيل الدخول</title></head>
-<body><h1>تسجيل الدخول</h1></body>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - ساحة المعرفة</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <h1>تسجيل الدخول</h1>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="اسم المستخدم" required>
+            <input type="password" id="password" placeholder="كلمة المرور" required>
+            <button type="submit">دخول</button>
+        </form>
+        <hr>
+        <h2>إنشاء حساب جديد</h2>
+        <form id="registerForm">
+            <input type="text" id="regUsername" placeholder="اسم المستخدم" required>
+            <input type="password" id="regPassword" placeholder="كلمة المرور" required>
+            <select id="regRole">
+                <option value="student">طالب</option>
+                <option value="admin">مسؤول</option>
+            </select>
+            <button type="submit">تسجيل</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.username === username && u.password === password);
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                alert('تم تسجيل الدخول بنجاح!');
+                window.location.href = 'index.html';
+            } else {
+                alert('بيانات الدخول غير صحيحة.');
+            }
+        });
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+            const role = document.getElementById('regRole').value;
+            const success = registerUser(username, password, role);
+            if (success) {
+                document.getElementById('registerForm').reset();
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
 </html>

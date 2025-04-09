@@ -1,5 +1,65 @@
 <!DOCTYPE html>
-<html lang="ar">
-<head><meta charset="UTF-8"><title>ساحة المعرفة</title></head>
-<body><h1>مرحبًا بك في ساحة المعرفة</h1></body>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ساحة المعرفة</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="شعار ساحة المعرفة">
+                <h1>ساحة المعرفة</h1>
+            </div>
+            <div class="user-info">
+                <span id="userName">المستخدم</span>
+                <span id="userRole">مستخدم</span>
+                <button id="logoutBtn" onclick="logout()">تسجيل الخروج</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="ابحث عن عنوان كتاب...">
+            <button id="searchBtn">بحث</button>
+            <button id="addBookBtn" class="admin-only">إضافة كتاب جديد</button>
+            <button id="viewUsersBtn" class="admin-only" onclick="showUsers()">عرض المستخدمين</button>
+        </div>
+
+        <div id="booksContainer" class="books-grid">
+            <!-- سيتم إضافة الكتب هنا -->
+        </div>
+    </main>
+
+    <!-- نافذة إضافة كتاب جديد -->
+    <!-- ... [تم اختصاره للحجم] ... -->
+
+    <!-- نافذة عرض المستخدمين -->
+    <div id="usersModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>قائمة المستخدمين</h2>
+                <button class="close-btn" onclick="closeModal('usersModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="usersList">
+                <!-- سيتم تعبئة المستخدمين هنا -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>جميع الحقوق محفوظة &copy; <span id="year"></span> - ساحة المعرفة</p>
+            <p class="developer">تم تطوير هذا الموقع بواسطة <strong>هشام محسن شلال</strong></p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+    <script src="script.js"></script>
+</body>
 </html>
